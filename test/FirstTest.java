@@ -5,7 +5,11 @@
 
 //import junit.framework.Test;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlPasswordInput;
+import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
+import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -39,7 +43,7 @@ public class FirstTest {
     }
 
     @Test
-    public void Main()throws Exception{
+    public void testHome()throws Exception{
 //        assertEquals(1, 1);
         WebClient wc = new WebClient();
         wc.setJavaScriptEnabled(false);
@@ -52,8 +56,22 @@ public class FirstTest {
     }
 
     @Test
-    public void testSum()throws Exception{
-        assertEquals("Check if equals",1, 2);
+    public void testLogin()throws Exception{
+        WebClient wc = new WebClient();
+	wc.setJavaScriptEnabled(false);
+	HtmlPage newP = (HtmlPage) wc.getPage("http://friendseat.com/login.php");
+
+	HtmlForm form = newP.getFormByName("frm");
+	HtmlTextInput user = (HtmlTextInput) form.getInputByName("txtName");
+	user.setValueAttribute("aevans@friendseat.com");
+	HtmlPasswordInput pass = (HtmlPasswordInput) form.getInputByName("txtPassword");
+	pass.setValueAttribute("yahyah1");
+	HtmlSubmitInput submit = (HtmlSubmitInput) form.getInputByName("btnSubmit");
+	HtmlPage page = (HtmlPage) submit.click();
+//		System.out.println(page.asText());
+        assertTrue("Load time",page.getWebResponse().getLoadTime()<10000);
+	assertTrue("Check Avatar on Header",page.asXml().contains("user-is-logged"));
+	assertTrue("Check Image avatar",page.asXml().contains("http://graph.facebook.com/507423116/picture"));
     }
 
 }
