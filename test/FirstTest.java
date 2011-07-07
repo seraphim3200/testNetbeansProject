@@ -39,19 +39,16 @@ public class FirstTest {
     }
 
     @Test
-    public void test1()throws Exception{
+    public void TestHome()throws Exception{
 //        assertEquals(1, 1);
         WebClient wc = new WebClient();
         wc.setJavaScriptEnabled(false);
         HtmlPage page = (HtmlPage) wc.getPage("http://friendseat.com");
         String myURL = page.getFullyQualifiedUrl("")+"";
         assertEquals("http://friendseat.com/", myURL);
+        assertEquals("HTTP status response",200,page.getWebResponse().getStatusCode());
+        assertTrue(page.getWebResponse().getLoadTime()<10000);
 
-    }
-
-    @Test
-    public void testSum()throws Exception{
-        assertEquals("Check if equals",1, 2);
     }
 
 }

@@ -15,7 +15,7 @@ import org.junit.runners.Suite;
  * @author Angelo
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({TestEquals.class,FirstTest.class})
+@Suite.SuiteClasses({FirstTest.class})
 public class TestFESuite {
 
     @BeforeClass
