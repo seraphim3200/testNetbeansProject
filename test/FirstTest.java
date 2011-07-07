@@ -75,7 +75,7 @@ public class FirstTest {
 	assertTrue("Check Avatar on Header",page.asXml().contains("user-is-logged"));
 	assertTrue("Check Image avatar",page.asXml().contains("http://graph.facebook.com/507423116/picture"));
         assertTrue("Check Profile Image",page.asXml().contains("user_photo/thumbnail400/242__friendseat_antonioevans.jpg"));
-        List<HtmlImage> feedImgPath = (List<HtmlImage>) page.getByXPath("id('feedtab')/x:div[2]/div[1]/a/img");
+        List<HtmlImage> feedImgPath = (List<HtmlImage>) page.getByXPath("id('feedtab')/div[2]/div[1]/a/img");
         assertTrue("Check Feed Tab Images",feedImgPath.size()>0);
         wc.closeAllWindows();
     }
