@@ -74,4 +74,9 @@ public class FirstTest {
 	assertTrue("Check Image avatar",page.asXml().contains("http://graph.facebook.com/507423116/picture"));
     }
 
+    @Test
+    public void testFail()throws Exception{
+        assertEquals(1,2);
+    }
+
 }
