@@ -6,10 +6,12 @@
 //import junit.framework.Test;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPasswordInput;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -72,11 +74,10 @@ public class FirstTest {
         assertTrue("Load time",page.getWebResponse().getLoadTime()<10000);
 	assertTrue("Check Avatar on Header",page.asXml().contains("user-is-logged"));
 	assertTrue("Check Image avatar",page.asXml().contains("http://graph.facebook.com/507423116/picture"));
-    }
-
-    @Test
-    public void testFail()throws Exception{
-        assertEquals(1,2);
+        assertTrue("Check Profile Image",page.asXml().contains("user_photo/thumbnail400/242__friendseat_antonioevans.jpg"));
+        List<HtmlImage> feedImgPath = (List<HtmlImage>) page.getByXPath("id('feedtab')/x:div[2]/div[1]/a/img");
+        assertTrue("Check Feed Tab Images",feedImgPath.size()>0);
+        wc.closeAllWindows();
     }
 
 }
